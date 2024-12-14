@@ -1,0 +1,52 @@
+<resources>
+    <string name="app_name">My Application</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">支出收入</string>
+    <string name="menu_class">分類管理</string>
+    <string name="menu_web">常用網站</string>
+
+    <string name="home_total_input">總收入  ▶</string>
+    <string name="home_total_output">總支出  ▶</string>
+    <string name="home_total">總結餘</string>
+    <string name="home_button">+</string>
+
+    <string name="add_sw">支出/收入</string>
+    <string name="add_date">選擇日期</string>
+    <string name="add_money">輸入金額</string>
+    <string name="add_submit">送出</string>
+    <string-array name="add_output_spinner">
+        <item>早餐</item>
+        <item>午餐</item>
+        <item>晚餐</item>
+        <item>飲品</item>
+        <item>點心</item>
+        <item>交通</item>
+        <item>購物</item>
+        <item>娛樂</item>
+        <item>日用品</item>
+        <item>房租</item>
+        <item>醫療</item>
+        <item>社交</item>
+        <item>其他</item>
+    </string-array>
+    <string-array name="add_input_spinner">
+        <item>薪水</item>
+        <item>獎金</item>
+        <item>回饋</item>
+        <item>交易</item>
+        <item>股息</item>
+        <item>租金</item>
+        <item>投資</item>
+        <item>其他</item>
+    </string-array>
+
+    <string name="report_title">報表</string>
+
+
+</resources>
