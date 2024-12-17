@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+
 public class ReportActivity extends AppCompatActivity {
     TextView tvReportTitle, tvTotalAmount;
     ListView lvReportList;
@@ -23,11 +24,12 @@ public class ReportActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_report);
 
+        // 透過 findViewById 連結畫面元件
         tvReportTitle = findViewById(R.id.tvReportTitle);
         tvTotalAmount = findViewById(R.id.tvTotalAmount);
         lvReportList = findViewById(R.id.lvReportList);
 
-        // 接收傳遞過來的資料
+
         String type = getIntent().getStringExtra("type");
         reportListData = getIntent().getStringArrayListExtra("data");
 
@@ -38,24 +40,28 @@ public class ReportActivity extends AppCompatActivity {
                 tvReportTitle.setText("支出報表");
             }
 
-            // 計算總金額
+            // 計算並顯示總金額
             double totalAmount = calculateTotalAmount(reportListData);
             tvTotalAmount.setText(String.valueOf(totalAmount));
         }
 
-        // 設置 ListView 顯示資料
+        // 建立 ArrayAdapter 來顯示報表列表
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, reportListData);
         lvReportList.setAdapter(adapter);
     }
 
+    // 計算總金額的方法
     private double calculateTotalAmount(ArrayList<String> data) {
         double total = 0.0;
+
+        // 跑每一筆報表資料
         for (String entry : data) {
-            // 從字符串中提取金額並進行累加（假設金額在字符串的末尾）
-            String[] parts = entry.split("金額: ");
+            String[] parts = entry.split("金額: "); // 從字串中提取金額（假設金額在字串的末尾）
+
+            // 確保成功分割後可以解析金額
             if (parts.length > 1) {
                 try {
-                    total += Double.parseDouble(parts[1].split(" ")[0]);
+                    total += Double.parseDouble(parts[1].split(" ")[0]); // 將字串轉換為 double 類型並累加
                 } catch (NumberFormatException e) {
                     e.printStackTrace();
                 }
@@ -63,9 +69,4 @@ public class ReportActivity extends AppCompatActivity {
         }
         return total;
     }
-    private void onClick (View view){
-        finish();
-    }
 }
-
-

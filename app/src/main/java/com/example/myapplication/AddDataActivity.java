@@ -14,12 +14,19 @@ import android.app.DatePickerDialog;
 
 import java.util.Calendar;
 
+/**
+ * 新增記帳資料的活動
+ * 提供使用者輸入收入/支出金額、日期和類別的介面
+ */
 public class AddDataActivity extends AppCompatActivity implements View.OnClickListener {
 
-    Switch swh;  // 用來選擇支入或支出的 Switch
+    // UI 元件宣告
+    Switch swh;
     Button date, submit;
     EditText money;
     Spinner spr;
+
+    // 儲存選擇的日期時間和類別
     String selectedDateTime = "";
     String selectedSpr = "";
 
@@ -28,14 +35,12 @@ public class AddDataActivity extends AppCompatActivity implements View.OnClickLi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_data);
 
-        // 初始化 UI 元素
         swh = findViewById(R.id.swType);
         date = findViewById(R.id.btnDate);
         submit = findViewById(R.id.btnSubmit);
         money = findViewById(R.id.etMoney);
         spr = findViewById(R.id.spinner);
 
-        // 設置按鈕點擊事件
         date.setOnClickListener(this);
         submit.setOnClickListener(this);
         swh.setOnClickListener(this);
@@ -45,18 +50,17 @@ public class AddDataActivity extends AppCompatActivity implements View.OnClickLi
     public void onClick(View view) {
         if (view.getId() == R.id.btnSubmit) {
             String amount = money.getText().toString();
+
             if (!amount.isEmpty() && !selectedDateTime.isEmpty()) {
                 String type = swh.isChecked() ? "收入" : "支出";
-
-                // 獲取 Spinner 選中的值
                 selectedSpr = spr.getSelectedItem().toString();
 
-                // 回傳資料
                 Intent resultIntent = new Intent();
                 resultIntent.putExtra("money", amount);
                 resultIntent.putExtra("dateTime", selectedDateTime);
-                resultIntent.putExtra("class", selectedSpr); // 回傳 Spinner 選擇的類別
-                resultIntent.putExtra("type", type);         // 回傳收入或支出類型
+                resultIntent.putExtra("class", selectedSpr);
+                resultIntent.putExtra("type", type);
+
                 setResult(RESULT_OK, resultIntent);
                 finish();
             } else {
@@ -70,18 +74,18 @@ public class AddDataActivity extends AppCompatActivity implements View.OnClickLi
             int month = calendar.get(Calendar.MONTH);
             int day = calendar.get(Calendar.DAY_OF_MONTH);
 
+            // 創建日期選擇對話框
             DatePickerDialog datePickerDialog = new DatePickerDialog(
                     this, (view1, selectedYear, selectedMonth, selectedDay) -> {
-
                 selectedDateTime = selectedYear + "/" + (selectedMonth + 1) + "/" + selectedDay;
                 date.setText(selectedDateTime);
             }, year, month, day);
-
             datePickerDialog.show();
         }
 
+        // 切換收入/支出開關時的處理
         if (view.getId() == R.id.swType) {
-            boolean isIncome = swh.isChecked(); // 是否為收入
+            boolean isIncome = swh.isChecked();
             ArrayAdapter<String> adapter;
 
             if (isIncome)
